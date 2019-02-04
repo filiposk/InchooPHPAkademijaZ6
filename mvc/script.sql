@@ -4,7 +4,9 @@ use social_network;
 
 CREATE TABLE post(
 id int not null primary key auto_increment,
-content text
+content text,
+image text,
+dateCreated timestamp not null DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 )engine=InnoDb;
 
 INSERT INTO post (content) values ('evo danas opet pada kiša'), ('jedem jagode');

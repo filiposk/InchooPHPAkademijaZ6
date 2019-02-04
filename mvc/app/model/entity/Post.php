@@ -3,13 +3,18 @@
 class Post
 {
     private $id;
-
     private $content;
+    private $dateCreated;
+    private $image;
 
-    public function __construct($id, $content)
+    public function __construct($id, $content, $dateCreated, $image)
     {
         $this->setId($id);
         $this->setContent($content);
+        $date = date_create($dateCreated);
+        $date->format('d.m.Y. H:i');
+        $this->setDateCreated($date);
+        $this->setImage($image);
     }
 
     public function __set($name, $value)
@@ -39,10 +44,10 @@ class Post
     {
         $list = [];
         $db = Db::connect();
-        $statement = $db->prepare("select * from post ORDER BY id DESC ");
+        $statement = $db->prepare("select * from post ORDER BY dateCreated DESC ");
         $statement->execute();
         foreach ($statement->fetchAll() as $post) {
-            $list[] = new Post($post->id, $post->content);
+            $list[] = new Post($post->id, $post->content, $post->image, $post->dateCreated);
         }
         return $list;
     }
@@ -55,7 +60,7 @@ class Post
         $statement->bindValue('id', $id);
         $statement->execute();
         $post = $statement->fetch();
-        return new Post($post>id, $post->content);
+        return new Post($post->id, $post->content, $post->image, $post->dateCreated);
     }
 
 }

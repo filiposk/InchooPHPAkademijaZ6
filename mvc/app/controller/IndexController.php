@@ -62,7 +62,7 @@ class IndexController
 
     public static function uploadImage($id)
     {
-        $target_dir = "app/images/";
+        $target_dir = "images/";
         $name = basename($_FILES["fileToUpload"]["name"]);
         $target_file = $target_dir . $name;
         if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {

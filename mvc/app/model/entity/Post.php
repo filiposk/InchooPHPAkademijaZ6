@@ -11,10 +11,10 @@ class Post
     {
         $this->setId($id);
         $this->setContent($content);
-        $date = date_create($dateCreated);
-        $date->format('d.m.Y. H:i');
-        $this->setDateCreated($date);
         $this->setImage($image);
+        $date = date_create($dateCreated);
+//        $date = date_format($date, 'd.m.Y. H:i');
+        $this->setDateCreated($date);
     }
 
     public function __set($name, $value)
